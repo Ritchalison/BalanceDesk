@@ -1,0 +1,20 @@
+# Application release files belong on GitHub Releases, not in this repository.
+*.zip
+*.sha256
+
+# Never publish local BalanceDesk data or configuration.
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.env*
+data/
+backups/
+config/
+logs/
+state/
+
+# Operating-system metadata.
+.DS_Store
+Thumbs.db
+Desktop.ini

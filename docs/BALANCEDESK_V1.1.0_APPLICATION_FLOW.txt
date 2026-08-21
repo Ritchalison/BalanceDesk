@@ -1,0 +1,495 @@
+BALANCEDESK v1.1.0 - APPLICATION FLOW AND CALCULATION GUIDE
+============================================================
+
+Version: 1.1.0
+Runtime: Local-only Windows x64 application
+Database: Local SQLite database
+Currency: Ghana cedis (GHS), stored internally as whole pesewas
+
+PURPOSE
+-------
+BalanceDesk records one business's daily MoMo activity, credit sales,
+customer credit payments, expenses, physical closing counts, reconciliation,
+and the final locking of a Business Day.
+
+BalanceDesk does not record individual Cash Sales. Instead, Cash Sales are
+calculated at the end of the day from the physical cash counted in the drawer.
+
+
+1. FIRST-TIME APPLICATION SETUP
+-------------------------------
+1. Extract the complete client ZIP to a normal local Windows folder.
+2. Run "Setup BalanceDesk.bat" once.
+3. Setup creates:
+   - private local security settings;
+   - a new empty local database;
+   - one BalanceDesk desktop shortcut with the BalanceDesk logo.
+4. Setup displays a private first-run Administrator setup code. Copy it from
+   the setup window when you are ready to complete the Administrator form.
+5. On the setup screen, enter the business name, Administrator username,
+   Administrator password, and the displayed setup code.
+6. After the first Administrator is created, normal users see the login screen.
+
+New and reset passwords must:
+- contain at least 8 characters, including an uppercase letter, lowercase letter,
+  number, and symbol;
+- avoid obvious letter, number, and keyboard sequences or repeated patterns;
+- avoid common password words; and
+- not be based on the user's name, username, business name, or BalanceDesk.
+
+The form shows these checks as you type. They are also checked again securely
+when the form is submitted.
+
+You do not run setup every day. Use the BalanceDesk desktop shortcut to open
+the application whenever you need it.
+
+
+2. USER ROLES
+-------------
+STANDARD USER
+- Records MoMo Sales.
+- Records Credit Sales.
+- Records Cash or MoMo Credit Payments.
+- Records Cash or MoMo Expenses.
+- Submits the physical closing cash count and actual closing MoMo balance.
+- Can view permitted customer information.
+- Can cancel an eligible record that the user created while the day is Open.
+
+ADMINISTRATOR
+- Has the permitted operational functions of a Standard user.
+- Opens Business Days.
+- Reviews reconciliation and performs Final Close.
+- Returns a day to Counts or Operations when corrections are required.
+- Reopens eligible Closed Days.
+- Corrects opening values with a recorded reason.
+- Reviews customer classifications and possible duplicates.
+- Performs later payment allocations and allocation reversals.
+- Views Closed Days and Activity History.
+- Creates, deactivates, reactivates, and resets passwords for Standard users.
+
+There is no role switch inside one session. Sign out and sign in using the
+appropriate account.
+
+
+3. BUSINESS DAY STATES
+----------------------
+A Business Day normally moves through these stages:
+
+NO ACTIVE DAY
+    |
+    v
+OPEN
+    |
+    v
+COUNTS SUBMITTED
+    |
+    v
+RECONCILIATION CONFIRMED
+    |
+    v
+CLOSED
+
+If a correction is required before Final Close, an Administrator can return the
+day to Counts or Operations. A Closed Day can be moved into a controlled
+REOPENED state by an Administrator when no other Business Day is active.
+
+
+4. OPENING A BUSINESS DAY
+-------------------------
+Only an Administrator opens a Business Day.
+
+The Administrator enters:
+- Business Date;
+- Drawer Cash;
+- Drawer Coins; and
+- Opening MoMo Balance.
+
+Opening Drawer Float is calculated as:
+
+    Opening Drawer Float = Drawer Cash + Drawer Coins
+
+Example:
+    Drawer Cash                  GHS 1,000.00
+    Drawer Coins                 GHS    50.00
+    Opening Drawer Float         GHS 1,050.00
+
+Important rules:
+- Only one active Business Day is allowed.
+- Opening fields start blank for every new day.
+- Yesterday's opening figures are not automatically carried forward.
+- Opening values become locked after opening in the normal workflow.
+- A Standard user cannot change opening values.
+- An Administrator can later use the controlled Correct Opening Values action,
+  but must provide a reason; the before-and-after values remain in the audit.
+
+
+5. RECORDING DAILY OPERATIONS
+-----------------------------
+Operations can normally be recorded while the Business Day is Open.
+
+5.1 MOMO SALE
+- Record every MoMo Sale individually.
+- Enter provider, amount, date/time, and reference when available.
+- A MoMo Sale:
+  - increases the MoMo Sales total;
+  - increases Expected Closing MoMo; and
+  - contributes to Accounted Sales.
+
+5.2 CREDIT SALE
+- Every Credit Sale belongs to a customer.
+- Select an existing customer or create a Provisional customer.
+- Enter invoice/reference, amount, due date, and description.
+- A Credit Sale:
+  - increases the customer's outstanding balance;
+  - contributes to Accounted Sales on the sale's Business Day; and
+  - does not increase today's Cash or MoMo balance until payment is received.
+
+5.3 CREDIT PAYMENT
+- Use Credit Payment when a customer pays an earlier credit balance.
+- Select Cash or MoMo as the payment channel.
+- Allocate the payment to an invoice when the intended invoice is known.
+- A Credit Payment:
+  - reduces the customer's overall debt;
+  - increases today's Cash Credit Payments or MoMo Credit Payments total;
+  - affects the corresponding Cash or MoMo reconciliation channel; but
+  - does not contribute to Accounted Sales because the sale was counted when
+    the original Credit Sale occurred.
+
+5.4 EXPENSE
+- Every Expense uses either the Cash or MoMo channel.
+- Enter expense category, amount, date/time, and description.
+- A Cash Expense is added back when reconstructing Cash Sales because it reduced
+  the physical cash that remained in the drawer.
+- A MoMo Expense reduces Expected Closing MoMo.
+
+5.5 CANCELLATION
+- Financial records are not physically deleted.
+- An eligible MoMo Sale, Credit Sale, Credit Payment, or Expense can be cancelled
+  with a required reason.
+- The original record, cancellation reason, actor, and time remain visible.
+- During an Open day, a Standard user can cancel only an eligible record they
+  created; an Administrator can cancel an eligible business record.
+- After Counts are submitted, normal cancellation is locked.
+- In a Reopened day, correction writes are Administrator-only.
+
+
+6. CUSTOMERS, INVOICES, PAYMENTS, AND ALLOCATIONS
+-------------------------------------------------
+6.1 CUSTOMER CLASSIFICATION
+- A customer created during Credit Sale entry starts as Provisional.
+- An Administrator may confirm Provisional, Occasional, or Regular status.
+- Suggestions do not automatically change a classification.
+
+6.2 CUSTOMER OUTSTANDING BALANCE
+Conceptually, the customer balance is:
+
+    Customer Outstanding Balance
+      = Opening Customer Balance
+      + Credit Sales
+      - Credit Payments
+      + Approved Debit Adjustments
+      - Approved Credit Adjustments
+
+In this version, the ledger is calculated from the retained financial records.
+Cancelled records do not remain active in the current balance.
+
+6.3 PAYMENT ALLOCATION
+An allocation links part of a Credit Payment to a particular Credit Sale invoice.
+
+Rules:
+- The allocation cannot exceed the payment's unallocated remainder.
+- The allocation cannot exceed the invoice's outstanding amount.
+- One payment may be allocated across multiple invoices when valid.
+- Allocation does not create another payment.
+- Allocation does not reduce customer debt twice. The payment already reduced
+  customer debt; allocation only explains which invoice it settled.
+
+6.4 ALLOCATION REVERSAL
+- An Administrator may reverse an allocation with a required reason.
+- Reversal restores the invoice's outstanding amount.
+- Reversal restores the payment's unallocated amount.
+- It does not reverse the original customer payment.
+- It does not change the customer's overall debt, the day's operational totals,
+  or a previously frozen closing snapshot.
+
+
+7. SUBMITTING CLOSING COUNTS
+----------------------------
+At the end of operations, a Standard user or Administrator enters:
+- Total Cash Counted: all physical cash actually present in the drawer; and
+- Actual Closing MoMo: the real wallet balance observed at closing.
+
+After submission:
+- the day moves to Counts Submitted;
+- normal operational entry becomes read-only; and
+- the Administrator can perform Reconciliation Review.
+
+If the counts were wrong, the Administrator can use Return to Counts. If an
+underlying operation must be corrected, the Administrator can use Return to
+Operations. A reason is required and the prior submission remains in history.
+
+
+8. CASH SALES CALCULATION
+-------------------------
+BalanceDesk calculates Cash Sales from the physical closing cash count:
+
+    Calculated Cash Sales
+      = Total Cash Counted
+      - Drawer Cash
+      - Drawer Coins
+      - Cash Credit Payments
+      + Cash Expenses
+
+Why each part is used:
+- Total Cash Counted is the cash physically present at closing.
+- Drawer Cash and Drawer Coins are opening float, not today's sales.
+- Cash Credit Payments are money received today for earlier Credit Sales, so
+  they are cash movement but not today's sales.
+- Cash Expenses reduced the cash left in the drawer, so they are added back to
+  reconstruct the Cash Sales that occurred before the expenses were paid.
+
+Example:
+    Total Cash Counted           GHS 3,200.00
+    Less Drawer Cash            -GHS 1,000.00
+    Less Drawer Coins           -GHS    50.00
+    Less Cash Credit Payments   -GHS   400.00
+    Add Cash Expenses            GHS   250.00
+    ------------------------------------------------
+    Calculated Cash Sales        GHS 2,000.00
+
+
+9. MOMO RECONCILIATION
+----------------------
+Expected Closing MoMo is calculated as:
+
+    Expected Closing MoMo
+      = Opening MoMo Balance
+      + MoMo Sales
+      + MoMo Credit Payments
+      - MoMo Expenses
+
+MoMo Variance is:
+
+    MoMo Variance = Actual Closing MoMo - Expected Closing MoMo
+
+Interpretation:
+- Positive MoMo Variance = MoMo Overage.
+- Negative MoMo Variance = MoMo Shortage.
+- Zero MoMo Variance = Balanced.
+
+Example:
+    Opening MoMo                  GHS 2,500.00
+    Add MoMo Sales               +GHS 1,200.00
+    Add MoMo Credit Payments     +GHS   300.00
+    Less MoMo Expenses           -GHS   200.00
+    ------------------------------------------------
+    Expected Closing MoMo         GHS 3,800.00
+    Actual Closing MoMo           GHS 3,790.00
+    MoMo Variance                -GHS    10.00 (Shortage)
+
+
+10. ACCOUNTED SALES, OVERAGE, AND SHORTAGE
+------------------------------------------
+The Administrator enters Total Sales during Reconciliation Review. Total Sales
+is the business's authoritative daily sales figure used for comparison.
+
+Accounted Sales is calculated as:
+
+    Accounted Sales
+      = Calculated Cash Sales
+      + MoMo Sales
+      + Credit Sales
+
+Credit Payments are not added because they settle earlier Credit Sales and would
+otherwise count the same sale twice. Expenses are not direct sales; their Cash
+or MoMo effects are already handled in the channel calculations.
+
+Final Difference is:
+
+    Difference = Accounted Sales - Total Sales
+
+Overage and Shortage are then separated:
+
+    Overage  = maximum(Difference, 0)
+    Shortage = maximum(-Difference, 0)
+
+Meaning:
+- If Accounted Sales is greater than Total Sales, the positive difference is an
+  Overage and Shortage is zero.
+- If Accounted Sales is lower than Total Sales, the missing amount is a Shortage
+  and Overage is zero.
+- If they are equal, both Overage and Shortage are zero and the result is Balanced.
+
+Balanced example:
+    Calculated Cash Sales         GHS 2,000.00
+    MoMo Sales                    GHS 1,200.00
+    Credit Sales                  GHS   800.00
+    ------------------------------------------------
+    Accounted Sales               GHS 4,000.00
+    Total Sales                   GHS 4,000.00
+    Difference                    GHS     0.00
+    Overage                       GHS     0.00
+    Shortage                      GHS     0.00
+
+Overage example:
+    Accounted Sales               GHS 4,050.00
+    Total Sales                   GHS 4,000.00
+    Difference                   +GHS    50.00
+    Overage                       GHS    50.00
+    Shortage                      GHS     0.00
+
+Shortage example:
+    Accounted Sales               GHS 3,950.00
+    Total Sales                   GHS 4,000.00
+    Difference                   -GHS    50.00
+    Overage                       GHS     0.00
+    Shortage                      GHS    50.00
+
+MoMo Variance and Final Difference are separate checks. MoMo Variance checks the
+wallet channel. Final Difference compares total Accounted Sales with the Admin's
+authoritative Total Sales figure.
+
+
+11. RECONCILIATION CONFIRMATION AND FINAL CLOSE
+-----------------------------------------------
+The Administrator performs these as two separate actions:
+
+RECONCILIATION REVIEW
+1. Enter Total Sales.
+2. Review opening values, operational totals, physical counts, Calculated Cash
+   Sales, Expected and Actual Closing MoMo, MoMo Variance, Accounted Sales,
+   Difference, Overage, and Shortage.
+3. A non-zero difference requires the Administrator's acknowledgement. The
+   explanation is optional and can be used to record helpful context.
+4. Select Confirm Reconciliation.
+
+Confirm Reconciliation does not close the day. It records the reviewed state and
+allows a final check.
+
+FINAL CLOSE
+1. Review the confirmed figures again.
+2. Use Final Close and confirm the operation.
+3. BalanceDesk creates an immutable closing snapshot and locks the Business Day.
+
+After Final Close:
+- normal writes for that day are blocked;
+- the day appears under Closed Days;
+- its operational records and frozen reconciliation can be inspected later; and
+- opening, counts, reconciliation, closing actor, time, and audit history remain.
+
+
+12. REOPENING AND CORRECTING A CLOSED DAY
+-----------------------------------------
+Only an Administrator may reopen an eligible Closed Day.
+
+Conditions:
+- No other Business Day may be active.
+- A reopening reason is required.
+- The previous closing snapshot is retained unchanged.
+
+Flow:
+1. Open Closed Days and select the relevant day/latest snapshot.
+2. Select Reopen Business Day.
+3. Enter the reason and confirm.
+4. Make the authorised correction.
+5. Submit replacement closing counts.
+6. Confirm reconciliation again.
+7. Perform Final Close again.
+
+The second close creates another snapshot version. Earlier snapshot versions stay
+available and are not silently recalculated from the later corrections.
+
+
+13. CLOSED DAYS AND ACTIVITY HISTORY
+------------------------------------
+CLOSED DAYS
+- Administrator-only archive of closed Business Days.
+- Shows frozen reconciliation and snapshot versions.
+- Shows the paged operational ledger and correction/reopening history.
+
+ACTIVITY HISTORY
+- Administrator-only audit view.
+- Includes openings, count submissions, reconciliation, closes, returns,
+  reopenings, cancellations, allocation actions, customer decisions, and local
+  user administration.
+- Records the applicable actor and time.
+- Does not display passwords, security secrets, or session data.
+
+
+14. LOCAL USER AND PASSWORD FLOW
+--------------------------------
+- An Administrator can create Standard users.
+- An Administrator can deactivate or reactivate Standard users.
+- Deactivated users cannot log in.
+- An Administrator can reset a Standard user's password; existing sessions for
+  that Standard user are invalidated.
+- Users who know their current password can change it from Profile.
+- Administrator passwords cannot be reset from Local Users.
+
+
+15. START, STOP, BACKUP, AND RESTORE
+-----------------------------------
+STARTING EACH DAY
+- Double-click the desktop BalanceDesk shortcut.
+- It starts the private local application and opens a maximized app window in
+  Google Chrome when available, then Microsoft Edge, then your default browser.
+- If it is already running, the shortcut only reopens the app window.
+- Closing the app window does not delete data or stop the local server. Use the
+  BalanceDesk shortcut to reopen it. Windows stops it when the computer shuts down.
+
+STOPPING
+- You do not need to stop BalanceDesk just to close its app window or shut down
+  Windows.
+- Run "Stop BalanceDesk.bat" inside the extracted folder before moving or
+  updating that folder, backing up, restoring, or troubleshooting the server.
+
+BACKUP
+1. Run "Stop BalanceDesk.bat" inside the extracted folder.
+2. Run "Backup BalanceDesk.bat".
+3. BalanceDesk checks database integrity and foreign keys.
+4. It creates and verifies a timestamped SQLite snapshot in the backups folder.
+
+RESTORE
+1. Run "Stop BalanceDesk.bat" inside the extracted folder.
+2. Run "Restore BalanceDesk.bat".
+3. Select a BalanceDesk v1.1.0 .db backup.
+4. Type RESTORE exactly when requested.
+5. BalanceDesk verifies the selected backup.
+6. It creates a pre-restore safety backup and raw fallback.
+7. It restores and verifies the active database.
+8. Open BalanceDesk and confirm the expected records.
+
+All application data, settings, backups, and logs remain local to the extracted
+BalanceDesk folder. The application listens only on 127.0.0.1 and does not use a
+hosted database, cloud authentication, remote API, telemetry, email, SMS,
+WhatsApp, or external storage.
+
+
+16. IMPORTANT VERSION 1.1.0 SCOPE NOTES
+---------------------------------------
+Included:
+- Business Day opening, operations, closing counts, reconciliation, and closing.
+- MoMo Sales, Credit Sales, Credit Payments, and Cash/MoMo Expenses.
+- Customer balances, invoices, payment allocation, classification, and duplicate
+  review.
+- Audit-preserving cancellation, allocation reversal, reopening, corrections,
+  closing snapshot versions, and Activity History.
+- Desktop and mobile-responsive local browser interface.
+- Guided forms that prevent obvious blank, invalid, or unchanged submissions
+  before they reach the server, while every server and database rule remains
+  independently enforced.
+- Compact searchable customer, invoice, Activity History, customer review, and
+  user workflows with clear result feedback.
+- Collapsed Closed Day summaries, count correction, Total Sales editing, and
+  reconciliation support sections, plus a primary Daily Balance Sheet.
+- Offline Windows client runtime and local backup/restore tools.
+
+Not included:
+- Individual Cash Sale entry.
+- Inventory, products, suppliers, payroll, or tax accounting.
+- Cash/MoMo withdrawals, injections, or Cash-to-MoMo transfers.
+- Multi-branch or network/LAN access.
+- Direct MoMo provider or bank integration.
+- Cloud sync, hosted services, remote storage, messaging, or analytics.
+
+END OF BALANCEDESK v1.1.0 APPLICATION FLOW
