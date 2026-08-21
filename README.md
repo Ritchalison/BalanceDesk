@@ -6,6 +6,27 @@ BalanceDesk is a private, local-only Windows application for recording daily sal
 
 It is designed for a small business that wants a clear operational record without placing business data in a cloud database. The application, user accounts, audit history, backups, and SQLite database remain inside the extracted BalanceDesk folder on the user's computer.
 
+## Product preview
+
+All names, accounts, dates, and financial figures in these screenshots are fictional demonstration data.
+
+### Daily overview
+
+![BalanceDesk daily overview in dark mode](assets/screenshots/overview-desktop-dark.png)
+
+### Customer credit accounts
+
+![BalanceDesk customer credit accounts in dark mode](assets/screenshots/customers-desktop-dark.png)
+
+### Reconciliation on desktop and mobile
+
+<table>
+  <tr>
+    <td width="72%"><img src="assets/screenshots/reconciliation-desktop-dark.png" alt="BalanceDesk reconciliation review on desktop in dark mode"></td>
+    <td width="28%"><img src="assets/screenshots/reconciliation-mobile-dark.png" alt="BalanceDesk reconciliation review on mobile in dark mode"></td>
+  </tr>
+</table>
+
 ## Download BalanceDesk
 
 Download the application from [GitHub Releases](https://github.com/Ritchalison/BalanceDesk/releases).
