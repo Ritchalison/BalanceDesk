@@ -1,5 +1,3 @@
-# BalanceDesk License
-
 Copyright © 2026 Prince Manu Gyebi. All rights reserved.
 
 BalanceDesk is proprietary software and is not open source.
