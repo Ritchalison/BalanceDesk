@@ -88,3 +88,7 @@ The user remains responsible for protecting the Windows account and computer, ke
 This repository is intentionally the public face of BalanceDesk. It contains public documentation, release guidance, and approved brand material—not the private development source tree or internal project records.
 
 Packaged application ZIPs and checksum files are published as GitHub Release assets and are not committed into this repository.
+
+## License
+
+BalanceDesk is proprietary software and is not open source. See [LICENSE.md](LICENSE.md) for permitted use and restrictions.
