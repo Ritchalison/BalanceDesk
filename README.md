@@ -2,7 +2,7 @@
 
 ![BalanceDesk — Daily reconciliation](assets/balancedesk-logo.svg)
 
-BalanceDesk is a private, local-only Windows application for recording daily sales, credit activity, expenses, physical closing counts, reconciliation, and final Business Day closure.
+BalanceDesk is a local-first, offline Windows application for recording daily sales, credit activity, expenses, physical closing counts, reconciliation, and final Business Day closure.
 
 It is designed for a small business that wants a clear operational record without placing business data in a cloud database. The application, user accounts, audit history, backups, and SQLite database remain inside the extracted BalanceDesk folder on the user's computer.
 
