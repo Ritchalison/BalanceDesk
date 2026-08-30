@@ -2,6 +2,43 @@
 
 This changelog records public client releases. Internal development history is intentionally maintained outside this public documentation repository.
 
+## 1.2.0 — 30 August 2026
+
+### Windows and Linux delivery
+
+- Added the recommended per-user Windows x64 Setup executable alongside the Windows portable ZIP.
+- Added the first public x86-64 Linux package as a deterministic `.tar.gz` for glibc 2.28 or newer and OpenSSL 3 systems.
+- Kept the public product version at `1.2.0`; accepted Windows executables report file revision `1.2.0.1`.
+- Added a native Windows launcher that owns one Chrome or Edge app window, reactivates an existing instance, stops its local server when the owned window closes, and signs out local sessions.
+- Added clean Windows Start entries for BalanceDesk, Data & Recovery, Diagnostics, Stop, and Uninstall.
+- Kept installed Windows business data separate under `%LOCALAPPDATA%\BalanceDesk`, allowing updates, uninstall, and reinstall without deleting it.
+
+### Data safety and migration
+
+- Added a consolidated Data & Recovery utility for verified backup, confirmed restore, guarded existing-data import, diagnostics, and safe stop.
+- Added existing-workspace import during a clean Windows installation, accepting a trusted BalanceDesk `.db` or extracted portable folder before first launch.
+- Added an **Import existing data** handoff beneath first-time Administrator setup; BalanceDesk now closes safely before starting the native import workflow and reopens at login after success.
+- Made import warnings explicit that the selected business, users, passwords, customers, transactions, and history replace the active workspace rather than merging with it.
+- Added pre-import and pre-restore recovery copies, migration-baseline verification, session invalidation, and client-facing diagnostics that exclude secrets and business records.
+- Hardened Linux private data to owner-only directories and files and added safe permission repair for existing portable workspaces.
+
+### Reliability and interface
+
+- Removed the recurring stale-browser submission state that could leave forms showing **Processing** or **Recording** after the server had already completed the write.
+- Added bounded submission handling and verification across operational, setup, authentication, customer, user, closing, and reconciliation workflows.
+- Reworked first-time Administrator setup into a desktop-height layout with a two-column form while preserving a compact mobile flow.
+- Redesigned Reconciliation Review, clarified balanced and discrepancy states, and aligned confirmation and return actions.
+- Replaced persistent success-message stacks with temporary toast notifications throughout the application.
+- Added responsive fixed-width data tables that scroll horizontally instead of squeezing columns into unreadable layouts.
+
+### Runtime and documentation
+
+- Updated the supported runtime stack, including Next.js 16.3.3 and React 19.2.8, without changing the database schema or financial calculations.
+- Added exact-artifact Windows and native Linux acceptance for checksums, packaged runtime health, database setup, backup, restore, import, update, uninstall, and restart behavior.
+- Added the illustrated [BalanceDesk v1.2.0 client guide](docs/BalanceDesk-v1.2.0-Client-Guide.pdf), revised installation guidance, and the v1.2.0 application-flow guide.
+
+The Windows executables are not code-signed, so Windows may display an unknown-publisher or SmartScreen warning. Code signing is deferred to a later release. A macOS package is also deferred.
+
 ## 1.1.0 — 21 August 2026
 
 ### Daily workflow and reconciliation
