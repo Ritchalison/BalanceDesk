@@ -8,24 +8,27 @@ The current v1.2.0 release supports Windows x64 and x86-64 Linux. It includes it
 
 ## Product preview
 
-All names, accounts, dates, and financial figures in these screenshots are fictional demonstration data.
+These screenshots were captured from BalanceDesk v1.2.0. All names, accounts, dates, and financial figures shown are fictional demonstration data.
 
-### Daily overview
+### First-time local workspace setup
 
-![BalanceDesk daily overview in dark mode](assets/screenshots/overview-desktop-dark.png)
+![BalanceDesk v1.2.0 first-time local workspace setup in dark mode](assets/screenshots/v1.2.0-setup-desktop-dark.png)
 
-### Customer credit accounts
+### Daily operations and controlled corrections
 
-![BalanceDesk customer credit accounts in dark mode](assets/screenshots/customers-desktop-dark.png)
+![BalanceDesk v1.2.0 current Business Day and controlled correction cycle in dark mode](assets/screenshots/v1.2.0-current-day-desktop-dark.png)
 
-### Reconciliation on desktop and mobile
+### Customer credit position
 
-<table>
-  <tr>
-    <td width="72%"><img src="assets/screenshots/reconciliation-desktop-dark.png" alt="BalanceDesk reconciliation review on desktop in dark mode"></td>
-    <td width="28%"><img src="assets/screenshots/reconciliation-mobile-dark.png" alt="BalanceDesk reconciliation review on mobile in dark mode"></td>
-  </tr>
-</table>
+![BalanceDesk v1.2.0 customer credit position in dark mode](assets/screenshots/v1.2.0-customer-account-desktop-dark.png)
+
+### Reconciliation review
+
+![BalanceDesk v1.2.0 reconciliation review in dark mode](assets/screenshots/v1.2.0-reconciliation-desktop-dark.png)
+
+### Windows data and recovery tools
+
+![BalanceDesk v1.2.0 Data and Recovery tools on Windows](assets/screenshots/v1.2.0-data-recovery-windows.png)
 
 ## Download BalanceDesk v1.2.0
 
