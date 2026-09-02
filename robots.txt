@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ritchalison.github.io/BalanceDesk/sitemap.xml
