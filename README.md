@@ -4,6 +4,8 @@
 
 BalanceDesk is a local-first, offline desktop application for recording daily sales, credit activity, expenses, physical closing counts, reconciliation, and final Business Day closure.
 
+🌐 [Visit the BalanceDesk website](https://ritchalison.github.io/BalanceDesk/)
+
 The current v1.2.0 release supports Windows x64 and x86-64 Linux. It includes its own private runtime and keeps the application, local accounts, audit history, backups, and SQLite database on the user's computer. It does not require a hosted service or cloud database.
 
 ## Product preview
