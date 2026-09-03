@@ -36,438 +36,12 @@
   "softwareVersion": "1.2.0",
   "description": "Local-first, offline desktop software for daily operations, customer credit, reconciliation, backup and recovery.",
   "url": "https://ritchalison.github.io/BalanceDesk/",
-  "downloadUrl": "https://github.com/Ritchalison/BalanceDesk/releases/tag/v1.2.0",
-  "softwareHelp": "https://github.com/Ritchalison/BalanceDesk/blob/main/docs/BalanceDesk-v1.2.0-Client-Guide.pdf"
+  "downloadUrl": "https://github.com/ritchalison/BalanceDesk/releases/tag/v1.2.0",
+  "softwareHelp": "https://github.com/ritchalison/BalanceDesk/blob/main/docs/BalanceDesk-v1.2.0-Client-Guide.pdf"
 }
   </script>
-  <style>
-    :root{
-      --navy:#13213C;
-      --navy-deep:#07111f;
-      --navy-soft:#0d1728;
-      --gold:#F3B63A;
-      --gold-strong:#ffc246;
-      --bg:#070f1b;
-      --panel:#0e1725;
-      --panel-2:#121d2d;
-      --text:#f7f9fd;
-      --muted:#a8b4c8;
-      --muted-2:#7f8ca3;
-      --line:rgba(255,255,255,.10);
-      --green:#60d98b;
-      --shadow:0 24px 70px rgba(0,0,0,.35);
-      --radius:24px;
-      --max:1180px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 86% 0%, rgba(243,182,58,.17), transparent 26rem),
-        linear-gradient(180deg,#08111d 0%,#07111f 40%,#08121f 100%);
-      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-      line-height:1.55;
-    }
-    a{color:inherit}
-    img{max-width:100%;display:block}
-    .wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
-    .nav{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:blur(18px);
-      background:rgba(7,15,27,.78);
-      border-bottom:1px solid var(--line);
-    }
-    .nav-inner{
-      height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px;
-    }
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-    .brand-mark{
-      width:44px;height:44px;border-radius:13px;background:var(--gold);
-      color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:23px;
-      box-shadow:0 8px 24px rgba(243,182,58,.15);
-    }
-    .brand-copy strong{display:block;font-size:16px;line-height:1.1}
-    .brand-copy span{display:block;color:#9eb6dc;font-size:12px;margin-top:4px}
-    .nav-links{display:flex;align-items:center;gap:24px;color:#c1cad8;font-size:14px}
-    .nav-links a{text-decoration:none}
-    .nav-links a:hover{color:white}
-    .nav-cta{
-      padding:10px 16px;border-radius:999px;background:var(--gold);color:#101827!important;
-      font-weight:800;
-    }
-    .hero{padding:88px 0 72px;overflow:hidden}
-    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:64px;align-items:center}
-    .eyebrow{
-      color:var(--gold);font-weight:850;letter-spacing:.16em;text-transform:uppercase;
-      font-size:13px;margin-bottom:16px;
-    }
-    h1{
-      margin:0;font-size:clamp(54px,7vw,92px);line-height:.94;letter-spacing:-.055em;
-      max-width:760px;
-    }
-    h1 span{color:var(--gold)}
-    .lead{
-      margin:26px 0 0;color:#c4cfdf;font-size:clamp(18px,2vw,23px);max-width:720px;
-    }
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      min-height:50px;padding:0 20px;border-radius:14px;text-decoration:none;
-      font-weight:800;border:1px solid var(--line);transition:.2s transform,.2s background;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:var(--gold);color:#121a27;border-color:transparent}
-    .btn-secondary{background:rgba(255,255,255,.045);color:white}
-    .hero-meta{
-      margin-top:28px;display:flex;gap:18px;flex-wrap:wrap;color:#97a5b9;font-size:13px
-    }
-    .hero-meta span{display:flex;align-items:center;gap:7px}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(96,217,139,.08)}
-    .hero-shot{
-      position:relative;padding:13px;border:1px solid rgba(255,255,255,.14);
-      border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
-      box-shadow:var(--shadow);
-      transform:perspective(1200px) rotateY(-3deg) rotateX(1deg);
-    }
-    .hero-shot:before{
-      content:"";position:absolute;inset:-40px;z-index:-1;
-      background:radial-gradient(circle,rgba(243,182,58,.18),transparent 60%);
-      filter:blur(25px);
-    }
-    .hero-shot img{border-radius:17px;border:1px solid rgba(255,255,255,.08)}
-    section{padding:82px 0}
-    .section-kicker{color:var(--gold);font-size:13px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
-    .section-title{
-      margin:10px 0 14px;font-size:clamp(34px,5vw,56px);line-height:1.02;letter-spacing:-.04em
-    }
-    .section-copy{color:var(--muted);max-width:760px;font-size:18px}
-    .workflow{
-      margin-top:42px;display:grid;grid-template-columns:repeat(5,1fr);gap:12px
-    }
-    .step{
-      min-height:126px;border:1px solid var(--line);border-radius:18px;padding:20px;
-      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));
-      position:relative;
-    }
-    .step .num{color:var(--gold);font-weight:900;font-size:12px;letter-spacing:.12em}
-    .step strong{display:block;margin-top:20px;font-size:17px}
-    .step span{display:block;color:var(--muted-2);font-size:13px;margin-top:6px}
-    .features{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px
-    }
-    .feature{
-      padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--panel);
-      min-height:205px;
-    }
-    .feature-icon{
-      width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
-      background:rgba(243,182,58,.11);color:var(--gold);font-size:20px
-    }
-    .feature h3{margin:22px 0 8px;font-size:18px}
-    .feature p{margin:0;color:var(--muted);font-size:14px}
-    .privacy-strip{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px
-    }
-    .privacy-card{
-      border:1px solid var(--line);border-radius:18px;padding:22px;background:rgba(255,255,255,.035)
-    }
-    .privacy-card strong{color:var(--gold);font-size:13px;letter-spacing:.08em}
-    .privacy-card p{color:#c2ccda;margin:7px 0 0;font-size:14px}
-    .showcase{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:42px}
-    .shot{
-      border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel);
-      box-shadow:0 18px 55px rgba(0,0,0,.22);
-    }
-    .shot-head{
-      display:flex;align-items:center;justify-content:space-between;padding:14px 18px;
-      border-bottom:1px solid var(--line);color:#b4bfd0;font-size:12px;letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .lights{display:flex;gap:7px}
-    .lights i{display:block;width:8px;height:8px;border-radius:50%;background:#4b5668}
-    .lights i:first-child{background:var(--gold)}
-    .shot img{width:100%;height:auto}
-    .showcase-stack{display:grid;gap:22px}
-    .light-panel{
-      background:#f5f7fb;padding:0;border-color:rgba(255,255,255,.15)
-    }
-    .light-panel .shot-head{color:#556176;border-bottom-color:#d8dfe9}
-    .downloads{
-      background:
-        radial-gradient(circle at 70% 0%,rgba(243,182,58,.15),transparent 28rem),
-        rgba(255,255,255,.025);
-      border-top:1px solid var(--line);border-bottom:1px solid var(--line)
-    }
-    .download-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}
-    .download-card{
-      border:1px solid var(--line);border-radius:22px;padding:26px;background:var(--panel);
-      display:flex;flex-direction:column;min-height:260px
-    }
-    .pill{
-      width:max-content;padding:7px 10px;border-radius:999px;background:rgba(243,182,58,.11);
-      color:var(--gold);font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase
-    }
-    .download-card h3{font-size:22px;margin:18px 0 6px}
-    .download-card p{color:var(--muted);font-size:14px;margin:0 0 22px}
-    .download-card .btn{margin-top:auto}
-    .download-note{margin-top:18px;color:#8f9bb0;font-size:12px}
-    .docs-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
-    .docs-links{display:grid;gap:12px;margin-top:28px}
-    .docs-links a{
-      text-decoration:none;border:1px solid var(--line);border-radius:15px;padding:16px 18px;
-      background:rgba(255,255,255,.03);display:flex;justify-content:space-between;gap:18px
-    }
-    .docs-links a span{color:var(--muted)}
-    .guide-preview{
-      border-radius:24px;overflow:hidden;background:#fff;box-shadow:var(--shadow);
-      max-width:450px;justify-self:end;
-    }
-    footer{padding:36px 0 46px;color:#8491a6;font-size:13px}
-    .footer-inner{display:flex;justify-content:space-between;gap:30px;border-top:1px solid var(--line);padding-top:26px}
-    .footer-inner strong{color:#d4dce9}
-    @media (max-width:900px){
-      .nav-links a:not(.nav-cta){display:none}
-      .hero{padding-top:58px}
-      .hero-grid,.docs-grid{grid-template-columns:1fr}
-      .hero-shot{transform:none}
-      .features{grid-template-columns:repeat(2,1fr)}
-      .workflow{grid-template-columns:1fr 1fr}
-      .showcase{grid-template-columns:1fr}
-      .guide-preview{justify-self:start;max-width:390px}
-      .download-grid,.privacy-strip{grid-template-columns:1fr}
-    }
-    @media (max-width:580px){
-      .wrap{width:min(var(--max),calc(100% - 26px))}
-      .hero{padding-bottom:48px}
-      section{padding:60px 0}
-      .features,.workflow{grid-template-columns:1fr}
-      h1{font-size:54px}
-      .hero-actions .btn{width:100%}
-      .footer-inner{flex-direction:column}
-    }
-  
-    /* Product experience redesign */
-    .experience-section{position:relative;overflow:hidden}
-    .experience-section:before{
-      content:"";position:absolute;width:460px;height:460px;right:-180px;top:140px;
-      background:radial-gradient(circle,rgba(243,182,58,.10),transparent 68%);
-      filter:blur(8px);pointer-events:none;
-    }
-    .experience-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:22px;
-      margin-top:42px;
-      align-items:start;
-    }
-    .experience-card{
-      border:1px solid var(--line);
-      border-radius:24px;
-      background:
-        linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018)),
-        var(--panel);
-      overflow:hidden;
-      box-shadow:0 24px 60px rgba(0,0,0,.20);
-      transform-style:preserve-3d;
-      transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
-    }
-    .experience-card:hover{
-      border-color:rgba(243,182,58,.28);
-      box-shadow:0 30px 80px rgba(0,0,0,.34),0 0 0 1px rgba(243,182,58,.05);
-    }
-    .experience-card-feature{
-      grid-column:1/-1;
-      display:grid;
-      grid-template-columns:.72fr 1.28fr;
-      align-items:center;
-      min-height:480px;
-    }
-    .experience-copy{padding:30px 30px 24px}
-    .experience-card-feature .experience-copy{padding:44px 40px 44px 40px}
-    .experience-label{
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:.13em;
-      font-size:11px;
-      font-weight:900;
-      margin-bottom:12px;
-    }
-    .experience-copy h3{
-      font-size:clamp(23px,2.4vw,34px);
-      line-height:1.05;
-      letter-spacing:-.03em;
-      margin:0 0 14px;
-    }
-    .experience-copy p{
-      color:var(--muted);
-      margin:0;
-      max-width:620px;
-      font-size:15px;
-    }
-    .experience-frame{
-      margin:0 20px 20px;
-      border:1px solid rgba(255,255,255,.11);
-      border-radius:18px;
-      background:#08111f;
-      overflow:hidden;
-      box-shadow:0 20px 48px rgba(0,0,0,.28);
-      transform:translateZ(18px);
-    }
-    .experience-card-feature .experience-frame{
-      margin:30px 30px 30px 0;
-    }
-    .frame-top{
-      min-height:42px;
-      display:grid;
-      grid-template-columns:1fr auto 1fr;
-      align-items:center;
-      gap:10px;
-      padding:0 14px;
-      border-bottom:1px solid var(--line);
-      color:#95a7c0;
-      font-size:10px;
-      letter-spacing:.09em;
-      text-transform:uppercase;
-      background:rgba(255,255,255,.025);
-    }
-    .frame-top>span:nth-child(3){text-align:right}
-    .window-dots{display:flex;gap:6px;align-items:center}
-    .window-dots i{width:7px;height:7px;border-radius:50%;background:#465268;display:block}
-    .window-dots i:first-child{background:var(--gold)}
-    .frame-media{
-      background:#08101b;
-      aspect-ratio:16/10;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
-    .frame-media img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      transform:scale(1.001);
-      transition:transform .7s cubic-bezier(.2,.7,.2,1);
-    }
-    .experience-card:hover .frame-media img{transform:scale(1.018)}
-    .compact-media{
-      aspect-ratio:1.46/1;
-      padding:18px;
-      background:
-        radial-gradient(circle at 50% 25%,rgba(243,182,58,.05),transparent 34%),
-        #08101b;
-    }
-    .compact-media img{
-      width:100%;
-      height:auto;
-      object-fit:contain;
-      border-radius:7px;
-    }
+    <link rel="stylesheet" href="assets/site/styles.css">
 
-
-    .current-day-media{
-      aspect-ratio:1.18/1;
-      background:
-        radial-gradient(circle at 50% 15%,rgba(243,182,58,.045),transparent 38%),
-        #08101b;
-    }
-    .wide-media{aspect-ratio:16/9}
-    .experience-grid .reveal:nth-child(4){transition-delay:.22s}
-    .experience-grid .reveal:nth-child(5){transition-delay:.28s}
-
-    /* Intelligent motion: subtle, performant, and disabled for reduced-motion users */
-    .reveal{
-      opacity:0;
-      transform:translateY(26px) scale(.995);
-      transition:
-        opacity .72s cubic-bezier(.2,.7,.2,1),
-        transform .72s cubic-bezier(.2,.7,.2,1);
-      will-change:opacity,transform;
-    }
-    .reveal.is-visible{
-      opacity:1;
-      transform:translateY(0) scale(1);
-    }
-    .experience-grid .reveal:nth-child(2){transition-delay:.08s}
-    .experience-grid .reveal:nth-child(3){transition-delay:.16s}
-
-    .hero-shot{will-change:transform}
-    .hero-shot img{transition:transform .5s ease}
-    .hero-shot:hover img{transform:scale(1.012)}
-
-    .feature,.step,.privacy-card,.download-card,.docs-links a{
-      transition:transform .28s ease,border-color .28s ease,background .28s ease,box-shadow .28s ease;
-    }
-    .feature:hover,.step:hover,.privacy-card:hover,.download-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(243,182,58,.24);
-      box-shadow:0 18px 44px rgba(0,0,0,.22);
-    }
-    .docs-links a:hover{
-      transform:translateX(5px);
-      border-color:rgba(243,182,58,.24);
-      background:rgba(243,182,58,.045);
-    }
-
-    .scroll-progress{
-      position:fixed;
-      z-index:80;
-      top:0;
-      left:0;
-      width:100%;
-      height:2px;
-      pointer-events:none;
-    }
-    .scroll-progress span{
-      display:block;
-      height:100%;
-      width:100%;
-      background:linear-gradient(90deg,var(--gold),#ffd773);
-      transform:scaleX(0);
-      transform-origin:left center;
-      box-shadow:0 0 14px rgba(243,182,58,.55);
-    }
-
-    .ambient-orb{
-      position:fixed;
-      width:360px;height:360px;
-      border-radius:50%;
-      pointer-events:none;
-      z-index:-1;
-      opacity:.16;
-      filter:blur(50px);
-      background:radial-gradient(circle,var(--gold),transparent 65%);
-      right:-160px;
-      top:28vh;
-      transition:transform .08s linear;
-    }
-
-    @media (max-width:900px){
-      .experience-grid{grid-template-columns:1fr}
-      .experience-card-feature{
-        grid-column:auto;
-        grid-template-columns:1fr;
-        min-height:0;
-      }
-      .experience-card-feature .experience-copy{padding:30px 30px 24px}
-      .experience-card-feature .experience-frame{margin:0 20px 20px}
-    }
-
-    @media (prefers-reduced-motion:reduce){
-      html{scroll-behavior:auto}
-      *,*::before,*::after{
-        animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
-        transition-duration:.01ms!important;
-        scroll-behavior:auto!important;
-      }
-      .reveal{opacity:1;transform:none}
-      .ambient-orb{display:none}
-    }
-
-  </style>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
@@ -483,7 +57,7 @@
         <a href="#features">Features</a>
         <a href="#screens">Screens</a>
         <a href="#docs">Guide</a>
-        <a class="nav-cta" href="https://github.com/Ritchalison/BalanceDesk/releases/tag/v1.2.0">Download v1.2.0</a>
+        <a class="nav-cta" href="https://github.com/ritchalison/BalanceDesk/releases/tag/v1.2.0">Download v1.2.0</a>
       </div>
     </div>
   </nav>
@@ -496,8 +70,8 @@
           <h1>Daily business reconciliation, <span>without the cloud.</span></h1>
           <p class="lead">BalanceDesk helps small businesses record daily operations, manage customer credit, reconcile the day and keep business data on their own computer.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://github.com/Ritchalison/BalanceDesk/releases/tag/v1.2.0">Download BalanceDesk v1.2.0</a>
-            <a class="btn btn-secondary" href="https://github.com/Ritchalison/BalanceDesk/blob/v1.2.0/docs/BalanceDesk-v1.2.0-Client-Guide.pdf">View Client Guide</a>
+            <a class="btn btn-primary" href="https://github.com/ritchalison/BalanceDesk/releases/tag/v1.2.0">Download BalanceDesk v1.2.0</a>
+            <a class="btn btn-secondary" href="https://github.com/ritchalison/BalanceDesk/blob/v1.2.0/docs/BalanceDesk-v1.2.0-Client-Guide.pdf">View Client Guide</a>
           </div>
           <div class="hero-meta">
             <span><i class="dot"></i>Windows x64</span>
@@ -671,19 +245,19 @@
             <span class="pill">Recommended</span>
             <h3>Windows installer</h3>
             <p>Normal per-user installation with Start menu entries, local data separation and uninstall support.</p>
-            <a class="btn btn-primary" href="https://github.com/Ritchalison/BalanceDesk/releases/download/v1.2.0/BalanceDesk-Setup-v1.2.0-windows-x64.exe">Download installer</a>
+            <a class="btn btn-primary" href="https://github.com/ritchalison/BalanceDesk/releases/download/v1.2.0/BalanceDesk-Setup-v1.2.0-windows-x64.exe">Download installer</a>
           </div>
           <div class="download-card">
             <span class="pill">Portable</span>
             <h3>Windows portable</h3>
             <p>Extract the complete package to a normal local folder and run BalanceDesk without a formal installation.</p>
-            <a class="btn btn-secondary" href="https://github.com/Ritchalison/BalanceDesk/releases/download/v1.2.0/BalanceDesk-v1.2.0-client-windows-x64.zip">Download ZIP</a>
+            <a class="btn btn-secondary" href="https://github.com/ritchalison/BalanceDesk/releases/download/v1.2.0/BalanceDesk-v1.2.0-client-windows-x64.zip">Download ZIP</a>
           </div>
           <div class="download-card">
             <span class="pill">Linux x64</span>
             <h3>Linux portable</h3>
             <p>Portable x86-64 Linux distribution for supported glibc/OpenSSL systems.</p>
-            <a class="btn btn-secondary" href="https://github.com/Ritchalison/BalanceDesk/releases/download/v1.2.0/BalanceDesk-v1.2.0-client-linux-x64.tar.gz">Download .tar.gz</a>
+            <a class="btn btn-secondary" href="https://github.com/ritchalison/BalanceDesk/releases/download/v1.2.0/BalanceDesk-v1.2.0-client-linux-x64.tar.gz">Download .tar.gz</a>
           </div>
         </div>
         <p class="download-note">BalanceDesk v1.2.0 Windows executables are not code-signed. Windows may show an unknown-publisher warning. Verify the SHA-256 checksum supplied with the release before running a transferred package.</p>
@@ -697,10 +271,10 @@
           <h2 class="section-title">Built to be used without the developer standing beside you.</h2>
           <p class="section-copy">The client guide covers setup, daily work, customer credit, reconciliation, closing, backup, recovery, troubleshooting and Linux use.</p>
           <div class="docs-links">
-            <a href="https://github.com/Ritchalison/BalanceDesk/blob/v1.2.0/docs/BalanceDesk-v1.2.0-Client-Guide.pdf"><strong>Client Guide · v1.2.0</strong><span>PDF →</span></a>
-            <a href="https://github.com/Ritchalison/BalanceDesk/blob/v1.2.0/docs/INSTALLATION.md"><strong>Installation & data safety</strong><span>Read →</span></a>
-            <a href="https://github.com/Ritchalison/BalanceDesk/blob/v1.2.0/docs/RELEASE_NOTES_v1.2.0.md"><strong>Release notes</strong><span>Read →</span></a>
-            <a href="https://github.com/Ritchalison/BalanceDesk"><strong>Public repository</strong><span>GitHub →</span></a>
+            <a href="https://github.com/ritchalison/BalanceDesk/blob/v1.2.0/docs/BalanceDesk-v1.2.0-Client-Guide.pdf"><strong>Client Guide · v1.2.0</strong><span>PDF →</span></a>
+            <a href="https://github.com/ritchalison/BalanceDesk/blob/v1.2.0/docs/INSTALLATION.md"><strong>Installation & data safety</strong><span>Read →</span></a>
+            <a href="https://github.com/ritchalison/BalanceDesk/blob/v1.2.0/docs/RELEASE_NOTES_v1.2.0.md"><strong>Release notes</strong><span>Read →</span></a>
+            <a href="https://github.com/ritchalison/BalanceDesk"><strong>Public repository</strong><span>GitHub →</span></a>
           </div>
         </div>
         <div class="guide-preview">
@@ -710,80 +284,157 @@
     </section>
   </main>
 
-  <footer>
+  <footer id="connect">
     <div class="wrap footer-inner">
-      <div><strong>BalanceDesk</strong> · Daily reconciliation</div>
-      <div>Built in Ghana · PMG · Proprietary software</div>
+      <div class="footer-copy">
+        <strong>BalanceDesk</strong>
+        <span>Daily reconciliation · Built in Ghana · PMG · Proprietary software</span>
+      </div>
+
+      <div class="builder-connect" data-connect>
+        <button
+          class="companion-trigger"
+          type="button"
+          aria-expanded="false"
+          aria-controls="builder-connect-panel"
+          aria-label="Connect with the builder"
+          data-connect-toggle
+        >
+          <span class="companion-wrap" aria-hidden="true">
+            <span class="companion" data-companion>
+              <span class="companion-antenna"></span>
+              <span class="companion-head">
+                <span class="companion-eye companion-eye-left"><i></i></span>
+                <span class="companion-eye companion-eye-right"><i></i></span>
+                <span class="companion-mouth"></span>
+              </span>
+              <span class="companion-feet"><i></i><i></i></span>
+            </span>
+            <span class="companion-shadow"></span>
+          </span>
+          <span class="companion-copy">
+            <small>Looking for the builder?</small>
+            <strong>Connect</strong>
+          </span>
+        </button>
+
+        <section
+          class="connect-panel"
+          id="builder-connect-panel"
+          aria-label="Connect with Prince Manu Gyebi"
+          hidden
+          data-connect-panel
+        >
+          <div class="connect-panel-head">
+            <div>
+              <div class="connect-eyebrow">Connect with the builder</div>
+              <h3>Prince Manu Gyebi</h3>
+              <p>Choose a profile to follow, or a direct channel to reach me.</p>
+            </div>
+            <button class="connect-close" type="button" aria-label="Close" data-connect-close>×</button>
+          </div>
+
+          <div class="connect-section">
+            <div class="section-head">
+              <span class="section-signal gold"></span>
+              <div>
+                <strong>Follow &amp; Profiles</strong>
+                <span>Public places to visit, follow, or explore</span>
+              </div>
+            </div>
+
+            <div class="social-grid social-grid-profiles">
+              <a href="https://www.linkedin.com/in/princemanugyebi/" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">in</span>
+                <span class="social-meta"><span>LinkedIn</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://x.com/princemanugyebi" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">X</span>
+                <span class="social-meta"><span>X</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://www.facebook.com/princemanugyebi" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">f</span>
+                <span class="social-meta"><span>Facebook</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://www.instagram.com/princemanugyebi/" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">◎</span>
+                <span class="social-meta"><span>Instagram</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://www.threads.net/@princemanugyebi" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">@</span>
+                <span class="social-meta"><span>Threads</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://www.tiktok.com/@princemanugyebi" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">♪</span>
+                <span class="social-meta"><span>TikTok</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://www.snapchat.com/add/princemanugyebi" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">S</span>
+                <span class="social-meta"><span>Snapchat</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://www.youtube.com/@princemanugyebi" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">▶</span>
+                <span class="social-meta"><span>YouTube</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://www.tumblr.com/princemanugyebi" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">t</span>
+                <span class="social-meta"><span>Tumblr</span><small>@princemanugyebi</small></span>
+              </a>
+              <a href="https://github.com/ritchalison" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">GH</span>
+                <span class="social-meta"><span>GitHub</span><small>@ritchalison</small></span>
+              </a>
+              <a href="https://www.reddit.com/user/ritchalison/" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">R</span>
+                <span class="social-meta"><span>Reddit</span><small>@ritchalison</small></span>
+              </a>
+              <a href="https://profile.playstation.com/Ritchalison" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">PS</span>
+                <span class="social-meta"><span>PlayStation</span><small>@ritchalison</small></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="connect-section connect-section-contact">
+            <div class="section-head">
+              <span class="section-signal blue"></span>
+              <div>
+                <strong>Direct Contact</strong>
+                <span>Message or contact channels</span>
+              </div>
+            </div>
+
+            <div class="social-grid social-grid-contact">
+              <a href="https://t.me/pgmrj" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">TG</span>
+                <span class="social-meta"><span>Telegram</span><small>@pgmrj</small></span>
+              </a>
+              <a href="https://wa.me/pgmrj" target="_blank" rel="me noopener noreferrer">
+                <span class="social-mark">WA</span>
+                <span class="social-meta"><span>WhatsApp</span><small>@pgmrj</small></span>
+              </a>
+              <button type="button" class="copy-profile" data-copy-handle="pgmrj" data-platform="Discord">
+                <span class="social-mark">D</span>
+                <span class="social-meta"><span>Discord</span><small>@pgmrj</small></span>
+                <em>copy</em>
+              </button>
+              <a href="mailto:ritchalison@duck.com">
+                <span class="social-mark">@</span>
+                <span class="social-meta"><span>Email</span><small>ritchalison@duck.com</small></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="connect-status" data-connect-status aria-live="polite">
+            Use any of the direct contact channels above, or follow through the public profiles.
+          </div>
+        </section>
+      </div>
     </div>
   </footer>
 
-  <script>
-    (() => {
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    <script src="assets/site/site.js" defer></script>
 
-      // Reveal sections only once as they enter the viewport.
-      const revealEls = [...document.querySelectorAll('.reveal')];
-      if (!reduced && 'IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              obs.unobserve(entry.target);
-            }
-          }
-        }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
-        revealEls.forEach(el => observer.observe(el));
-      } else {
-        revealEls.forEach(el => el.classList.add('is-visible'));
-      }
-
-      const progress = document.querySelector('.scroll-progress span');
-      const orb = document.querySelector('.ambient-orb');
-      let ticking = false;
-
-      function updateScrollEffects() {
-        const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-        const y = Math.min(max, Math.max(0, scrollY));
-        if (progress) progress.style.transform = `scaleX(${y / max})`;
-
-        // Very restrained parallax so the page feels alive without becoming distracting.
-        if (!reduced && orb) {
-          orb.style.transform = `translate3d(0, ${Math.round(y * 0.08)}px, 0)`;
-        }
-
-        const hero = document.querySelector('.hero-shot');
-        if (!reduced && hero && y < innerHeight * 1.2) {
-          const amount = Math.min(18, y * 0.025);
-          hero.style.transform = `perspective(1200px) rotateY(-3deg) rotateX(1deg) translate3d(0, ${amount}px, 0)`;
-        }
-
-        ticking = false;
-      }
-
-      addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(updateScrollEffects);
-          ticking = true;
-        }
-      }, { passive:true });
-      updateScrollEffects();
-
-      // Pointer-responsive depth on showcase cards, desktop only.
-      if (!reduced && matchMedia('(pointer:fine)').matches) {
-        document.querySelectorAll('[data-tilt]').forEach(card => {
-          card.addEventListener('pointermove', (e) => {
-            const r = card.getBoundingClientRect();
-            const px = (e.clientX - r.left) / r.width - .5;
-            const py = (e.clientY - r.top) / r.height - .5;
-            card.style.transform = `perspective(1000px) rotateX(${(-py * 2.1).toFixed(2)}deg) rotateY(${(px * 2.6).toFixed(2)}deg) translateY(-2px)`;
-          });
-          card.addEventListener('pointerleave', () => {
-            card.style.transform = '';
-          });
-        });
-      }
-    })();
-  </script>
 
 </body>
 </html>
